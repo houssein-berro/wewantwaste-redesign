@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@media (max-width: 768px) {
+  .step-scrollbar {
+    scrollbar-color: #2F855A transparent;
+    scrollbar-width: thin;
+  }
+
+  .step-scrollbar::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .step-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .step-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #2F855A;
+    border-radius: 3px;
+  }
+
+  .step-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #276749;
+  }
+}
+    
