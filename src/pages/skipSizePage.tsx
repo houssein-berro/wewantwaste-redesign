@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import StepProgressBar from "../components/stepProgressBar";
 import PageHeader from "../components/pageHeader";
+import { loadSkips } from "../store/slices/skipsSlice/skipsActions";
+import { useAppDispatch } from "../store/hooks";
 
 export default function SkipSizePage() {
-
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(loadSkips);
+  });
+  
   return (
     <div className="min-h-screen bg-background px-4 py-8">
       <StepProgressBar currentStepKey="Select Skip" />
@@ -11,7 +17,6 @@ export default function SkipSizePage() {
         title="Choose Your Skip Size"
         subtitle="Select the skip size that best suits your needs"
       />
-    
     </div>
   );
 }

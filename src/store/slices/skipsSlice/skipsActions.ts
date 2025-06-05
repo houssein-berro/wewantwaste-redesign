@@ -7,7 +7,7 @@ import {
 import type { Skip } from "../../../constants/skips";
 import { SKIPS_API_URL, LOCAL_STORAGE_KEY } from "../../../constants/skips";
 import type { AppDispatch } from "../../store";
-
+import { timeoutPromise } from "../../../utils/timeoutPromise";
 
 export async function loadSkips(dispatch: AppDispatch) {
   let cachedData: Skip[] | null = null;
@@ -17,7 +17,6 @@ export async function loadSkips(dispatch: AppDispatch) {
     try {
       cachedData = JSON.parse(stored) as Skip[];
       dispatch(fetchSkipsSuccess(cachedData));
-      
     } catch {
       cachedData = null;
     }
@@ -28,7 +27,10 @@ export async function loadSkips(dispatch: AppDispatch) {
   }
 
   try {
-    const response = await axios.get<Skip[]>(SKIPS_API_URL);
+    const response = (await Promise.race([
+      axios.get<Skip[]>(SKIPS_API_URL),
+      timeoutPromise,
+    ])) as { data: Skip[] };
     const apiData = response.data;
 
     const jsonApi = JSON.stringify(apiData);
@@ -37,9 +39,7 @@ export async function loadSkips(dispatch: AppDispatch) {
     if (jsonApi !== jsonCached) {
       try {
         localStorage.setItem(LOCAL_STORAGE_KEY, jsonApi);
-      } catch {
-        
-      }
+      } catch {}
       dispatch(fetchSkipsSuccess(apiData));
     }
   } catch (err: any) {
