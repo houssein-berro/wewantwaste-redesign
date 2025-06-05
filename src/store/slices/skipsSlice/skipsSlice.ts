@@ -12,7 +12,7 @@ const skipsSlice = createSlice({
       state.error = null;
     },
     fetchSkipsSuccess(state, action: PayloadAction<Skip[]>) {
-      state.items = action.payload;
+      state.skips = action.payload;
       state.loading = false;
     },
     fetchSkipsFailure(state, action: PayloadAction<string>) {
@@ -20,7 +20,7 @@ const skipsSlice = createSlice({
       state.error = action.payload;
     },
     clearSkips(state) {
-      state.items = [];
+      state.skips = [];
       state.loading = false;
       state.error = null;
     },

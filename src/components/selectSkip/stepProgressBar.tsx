@@ -1,7 +1,7 @@
 import React from "react";
 import { motion, Variants } from "framer-motion";
 import StepItem, { StepStatus } from "./stepItem";
-import { ALL_STEPS, StepKey } from "../constants/steps";
+import { ALL_STEPS, StepKey } from "../../constants/steps";
 
 interface Props {
   currentStepKey: StepKey;

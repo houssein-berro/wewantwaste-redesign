@@ -3,9 +3,14 @@ module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
     "./public/index.html"
+    
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["Rubik", "ui-sans-serif", "system-ui"],
+        body: ["Open Sans", "ui-sans-serif", "system-ui"],
+      },
       colors: {
         primary: {
           DEFAULT: "#2F855A",

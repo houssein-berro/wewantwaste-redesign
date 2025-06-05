@@ -16,13 +16,14 @@ export interface Skip {
   updated_at: string;
   allowed_on_road: boolean;
   allows_heavy_waste: boolean;
+  
 }
 
 /**
  * Shape of the slice’s state object
  */
 export interface SkipsState {
-  items: Skip[];
+  skips: Skip[];
   loading: boolean;
   error: string | null;
 }
@@ -31,7 +32,7 @@ export interface SkipsState {
  * The initial state for the slice
  */
 export const initialSkipsState: SkipsState = {
-  items: [],
+  skips: [],
   loading: false,
   error: null,
 };
@@ -42,6 +43,11 @@ export const initialSkipsState: SkipsState = {
  */
 export const SKIPS_API_URL = "https://app.wewantwaste.co.uk/api/skips/by-location?postcode=NR32&area=Lowestoft";
 
+/**
+ * Base URL for skip‐size images in Supabase Storage.
+ */
+export const SKIP_IMAGE_BASE_URL =
+  "https://yozbrydxdlcxghkphhtq.supabase.co/storage/v1/object/public/skips/skip-sizes";
 
 /**
  * Local storage key
