@@ -1,7 +1,9 @@
+// src/pages/skipSizePage.tsx
 import React, { useEffect, useState } from "react";
 import StepProgressBar from "../components/selectSkip/stepProgressBar";
 import PageHeader from "../components/selectSkip/pageHeader";
 import SkipGrid from "../components/selectSkip/skipGrid";
+import SkipGridSkeleton from "../components/selectSkip/skipGridSkeleton"; // ← import here
 import SkipFooter from "../components/selectSkip/skipFooter";
 
 import { loadSkips } from "../store/slices/skipsSlice/skipsActions";
@@ -22,22 +24,22 @@ export default function SkipSizePage() {
     setSelectedSkipId((prev) => (prev === skipId ? null : skipId));
   };
 
-  const selectedSkip: Skip | null = 
-    selectedSkipId !== null 
-      ? skips.find((s) => s.id === selectedSkipId) ?? null
-      : null;
+  const selectedSkip: Skip | null =
+    selectedSkipId !== null ? skips.find((s) => s.id === selectedSkipId) ?? null : null;
 
   const handleNext = (skip: Skip) => {
-    // e.g. navigate(`/choose-date/${skip.id}`)
+    // navigate to next step…
     console.log("Next →", skip);
   };
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      {/* STEP INDICATOR */}
       <div className="px-4 pt-6">
         <StepProgressBar currentStepKey="Select Skip" />
       </div>
 
+      {/* PAGE HEADER */}
       <div className="px-4 mt-4">
         <PageHeader
           title="Choose Your Skip Size"
@@ -45,14 +47,16 @@ export default function SkipSizePage() {
         />
       </div>
 
+      {/* DIVIDER UNDER HEADER */}
       <div className="max-w-4xl mx-auto w-full border-b border-neutral-300 mt-6 mb-6" />
 
-      <div className="px-4 flex-1 ">
+      {/* MAIN CONTENT */}
+      <div className="px-4 flex-1">
         {loading && (
-          <p className="text-center text-neutral-500 mb-4">
-            Loading skip sizes…
-          </p>
+          // ← use the skeleton component instead of plain text
+          <SkipGridSkeleton />
         )}
+
         {error && (
           <p className="text-center text-red-500 mb-4">Error: {error}</p>
         )}
@@ -66,6 +70,7 @@ export default function SkipSizePage() {
         )}
       </div>
 
+      {/* STICKY FOOTER (only shown when a skip is selected) */}
       {selectedSkip && (
         <SkipFooter
           selectedSkip={selectedSkip}
