@@ -1,11 +1,6 @@
-import logo from './logo.svg';
+import React from "react";
+import SkipSizePage from "./pages/skipSizePage";
 
-function App() {
-  return (
-    <div className="App">
-     
-    </div>
-  );
+export default function App() {
+  return <SkipSizePage />;
 }
-
-export default App;
