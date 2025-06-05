@@ -33,6 +33,10 @@ export default function SkipSizePage() {
     // e.g. navigate(`/choose-date/${skip.id}`)
     console.log("Next →", skip);
   };
+    const handleBack = (skip: Skip) => {
+    // e.g. navigate.goBack()
+    console.log("back");
+  };
 
   const filteredSkips = skips.filter((skip) => {
     if (filterRoadAllowed && !skip.allowed_on_road) return false;
@@ -156,6 +160,7 @@ export default function SkipSizePage() {
         <SkipFooter
           selectedSkip={selectedSkip}
           onNext={handleNext}
+          onBack={()=>handleBack}
         />
       )}
     </div>
