@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { CheckCircleIcon, ExclamationTriangleIcon } from "@heroicons/react/24/solid";
 import { SKIP_IMAGE_BASE_URL, type Skip } from "../../constants/skips";
 import PrimaryButton from "./primaryButton";
@@ -10,13 +10,14 @@ interface SkipCardProps {
 }
 
 export default function SkipCard({ skip, isSelected, onClick }: SkipCardProps) {
+  const [imageLoaded, setImageLoaded] = useState(false);
   const imageUrl = `${SKIP_IMAGE_BASE_URL}/${skip.size}-yarder-skip.jpg`;
 
   return (
     <div
       onClick={() => onClick(skip.id)}
       className={`
-        relative z-10                   /* ensures card sits above divider */
+        relative z-10
         flex flex-col justify-between 
         bg-surface rounded-2xl border
         overflow-hidden shadow-sm
@@ -28,12 +29,22 @@ export default function SkipCard({ skip, isSelected, onClick }: SkipCardProps) {
         cursor-pointer
       `}
     >
-      {/* IMAGE */}
+      {/* IMAGE CONTAINER */}
       <div className="relative h-40 sm:h-48 lg:h-56 bg-gray-100">
+        {!imageLoaded && (
+          <div className="absolute inset-0 bg-gray-300 animate-pulse" />
+        )}
+
         <img
           src={imageUrl}
           alt={`${skip.size} Yard Skip`}
-          className="w-full h-full object-cover"
+          loading="lazy"
+          onLoad={() => setImageLoaded(true)}
+          className={`
+            absolute inset-0 w-full h-full object-cover
+            transition-opacity duration-300 ease-in-out
+            ${imageLoaded ? "opacity-100" : "opacity-0"}
+          `}
         />
 
         {/* Yard-size badge in top right */}
@@ -41,7 +52,6 @@ export default function SkipCard({ skip, isSelected, onClick }: SkipCardProps) {
           {skip.size} Yards
         </div>
 
-        {/* “Not Allowed on the Road” badge if needed */}
         {!skip.allowed_on_road && (
           <div className="absolute bottom-2 left-2 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded-lg flex items-center space-x-1">
             <ExclamationTriangleIcon className="h-4 w-4" />

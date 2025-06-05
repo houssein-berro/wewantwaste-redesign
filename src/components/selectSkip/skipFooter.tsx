@@ -54,7 +54,9 @@ export default function SkipFooter({
           >
             Next: Choose Date
           </button>
+          
         </div>
+        
       </div>
     </div>
   );
