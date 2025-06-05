@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .step-scrollbar {
     scrollbar-color: #2F855A transparent;
     scrollbar-width: thin;

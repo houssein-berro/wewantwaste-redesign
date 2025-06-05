@@ -11,7 +11,7 @@ export default function SkipSizePage() {
   });
   
   return (
-    <div className="min-h-screen bg-background px-4 py-8">
+    <div className="min-h-screen bg-background px-4 py-4">
       <StepProgressBar currentStepKey="Select Skip" />
       <PageHeader
         title="Choose Your Skip Size"

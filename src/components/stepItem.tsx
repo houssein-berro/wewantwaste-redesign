@@ -31,15 +31,21 @@ export default function StepItem({ Icon, label, status }: Props) {
         title={label}
         tabIndex={0}
         className={`
-          ${circleBg} p-2 rounded-full flex items-center justify-center
+          ${circleBg}
+          p-1 sm:p-2
+          rounded-full flex items-center justify-center
           transition-transform duration-200
-          ${status === "active" ? "scale-110" : "hover:scale-110 focus:scale-110"}
+          ${
+            status === "active"
+              ? "scale-105 sm:scale-110"
+              : "hover:scale-105 sm:hover:scale-110 focus:scale-105 sm:focus:scale-110"
+          }
           focus:outline-none focus:ring-2 focus:ring-primary-light
         `}
       >
-        <Icon className={`h-5 w-5 ${iconColor}`} />
+        <Icon className={`h-4 w-4 sm:h-5 sm:w-5 ${iconColor}`} />
       </div>
-      <span className={`text-xs ${textColor}`}>{label}</span>
+      <span className={`text-[10px] sm:text-xs ${textColor}`}>{label}</span>
     </div>
   );
 }
